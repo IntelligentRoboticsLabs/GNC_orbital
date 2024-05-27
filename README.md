@@ -1,5 +1,9 @@
 # GNC orbital
 
+![distro](https://img.shields.io/badge/Ubuntu%2022-Jammy%20Jellyfish-green)
+![distro](https://img.shields.io/badge/ROS2-Humble-blue)
+[![humble](https://github.com/IntelligentRoboticsLabs/GNC_orbital/actions/workflows/humble.yaml/badge.svg)](https://github.com/IntelligentRoboticsLabs/GNC_orbital/actions/workflows/humble.yaml)
+
 Simulator for guidance, navigation and control of proximity orbital operations.
 
 #### Table of Contents
