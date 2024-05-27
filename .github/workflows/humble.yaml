@@ -1,9 +1,9 @@
-name: main
+name: humble
 
 on:
   push:
     branches:
-      - main
+      - humble
 
 jobs:
   ROS2:
