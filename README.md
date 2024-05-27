@@ -85,11 +85,7 @@ Once the simulation is launched, you can use the `ros2 topic list` command to ob
 /tf_static
 /ur10_joint_state_broadcaster/transition_event
 /ur10_joint_trajectory_controller/controller_state
-/ur10_joint_trajectory_controller/joint_trajectory![Screenshot from 2024-05-27 11-48-34](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/b7beaf98-5286-425e-b8b6-6e1ef7a0c83b)
-![Screenshot from 2024-05-27 11-48-34](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/b7beaf98-5286-425e-b8b6-6e1ef7a0c83b)
-![Screenshot from 2024-05-27 11-48-34](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/a4ca29ce-ec45-4ceb-a74e-2f61d4df3e67)
-![Screenshot from 2024-05-27 11-48-34](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/a4ca29ce-ec45-4ceb-a74e-2f61d4df3e67)
-
+/ur10_joint_trajectory_controller/joint_trajectory
 /ur10_joint_trajectory_controller/state
 /ur10_joint_trajectory_controller/transition_event
 /ur5_camera/camera_info
