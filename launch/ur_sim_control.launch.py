@@ -221,7 +221,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'world', default_value=[PathJoinSubstitution(
-            [FindPackageShare(runtime_config_package), 'worlds',  'lab.sdf'])]
+                [FindPackageShare(runtime_config_package), 'worlds',  'lab.sdf'])]
         )
     )
 
