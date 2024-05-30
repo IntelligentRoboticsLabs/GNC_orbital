@@ -106,10 +106,10 @@ def launch_setup(context, *args, **kwargs):
         arguments=['joint_state_broadcaster'],
     )
 
-    ur5_joint_state_broadcaster_spawner = Node(
+    ur3_joint_state_broadcaster_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['ur5_joint_state_broadcaster'],
+        arguments=['ur3_joint_state_broadcaster'],
     )
 
     ur10_joint_state_broadcaster_spawner = Node(
@@ -118,10 +118,10 @@ def launch_setup(context, *args, **kwargs):
         arguments=['ur10_joint_state_broadcaster'],
     )
 
-    ur5_joint_trajectory_spawner = Node(
+    ur3_joint_trajectory_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['ur5_joint_trajectory_controller'],
+        arguments=['ur3_joint_trajectory_controller'],
     )
 
     ur10_joint_trajectory_spawner = Node(
@@ -158,9 +158,9 @@ def launch_setup(context, *args, **kwargs):
 
     nodes_to_start.append(joint_state_broadcaster_spawner)
     nodes_to_start.append(robot_state_publisher_node)
-    nodes_to_start.append(ur5_joint_state_broadcaster_spawner)
+    nodes_to_start.append(ur3_joint_state_broadcaster_spawner)
     nodes_to_start.append(ur10_joint_state_broadcaster_spawner)
-    nodes_to_start.append(ur5_joint_trajectory_spawner)
+    nodes_to_start.append(ur3_joint_trajectory_spawner)
     nodes_to_start.append(ur10_joint_trajectory_spawner)
     nodes_to_start.append(gazebo_spawn_robot)
     nodes_to_start.append(gazebo)

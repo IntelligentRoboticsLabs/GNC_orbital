@@ -63,15 +63,15 @@
   <!-- create link fixed to the "world" -->
   <link name="world" />
 
-  <!-- arm ur5-->
+  <!-- arm ur3-->
   <xacro:ur_robot
-    name="ur5"
-    tf_prefix="ur5_"
+    name="ur3"
+    tf_prefix="ur3_"
     parent="world"
-    joint_limits_parameters_file="$(find ur_description)/config/ur5/joint_limits.yaml"
-    kinematics_parameters_file="$(find ur_description)/config/ur5/default_kinematics.yaml"
-    physical_parameters_file="$(find ur_description)/config/ur5/physical_parameters.yaml"
-    visual_parameters_file="$(find ur_description)/config/ur5/visual_parameters.yaml"
+    joint_limits_parameters_file="$(find ur_description)/config/ur3/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur_description)/config/ur3/default_kinematics.yaml"
+    physical_parameters_file="$(find ur_description)/config/ur3/physical_parameters.yaml"
+    visual_parameters_file="$(find ur_description)/config/ur3/visual_parameters.yaml"
     transmission_hw_interface="$(arg transmission_hw_interface)"
     safety_limits="$(arg safety_limits)"
     safety_pos_margin="$(arg safety_pos_margin)"
@@ -146,7 +146,7 @@
     <origin xyz="0 -2.39 1" rpy="-1.56 0 0" />          <!-- position robot in the world -->
   </xacro:ur_robot>
 
-  <xacro:sensor_d435i name="ur5_camera" parent="ur5_wrist_3_link" use_nominal_extrinsics="true">
+  <xacro:sensor_d435i name="ur10_camera" parent="ur10_wrist_3_link" use_nominal_extrinsics="true">
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:sensor_d435i>
 
