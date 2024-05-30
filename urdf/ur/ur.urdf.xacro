@@ -147,7 +147,7 @@
   </xacro:ur_robot>
 
   <xacro:sensor_d435i name="ur10_camera" parent="ur10_wrist_3_link" use_nominal_extrinsics="true">
-    <origin xyz="0 0 0" rpy="0 0 0" />
+    <origin xyz="0 0 0" rpy="0 -1.56 1.56" />
   </xacro:sensor_d435i>
 
   <xacro:if value="$(arg sim_gazebo)">

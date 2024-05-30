@@ -171,5 +171,5 @@ aluminum peripherial evaluation case.
     </xacro:if>
   </xacro:macro>
 
-  <xacro:gazebo_d435 camera_name="ur5_camera" reference_link="ur5_camera_color_optical_frame" />
+  <xacro:gazebo_d435 camera_name="ur10_camera" reference_link="ur10_camera_gyro_frame" />
 </robot>
