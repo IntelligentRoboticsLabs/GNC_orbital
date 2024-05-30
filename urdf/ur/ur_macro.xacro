@@ -108,7 +108,7 @@
 
     <xacro:if value="${generate_ros2_control_tag}">
       <!-- ros2 control include -->
-      <xacro:include filename="$(find ur_description)/urdf/ur.ros2_control.xacro" />
+      <xacro:include filename="$(find gnc_orbital)/urdf/ur/ur.ros2_control.xacro" />
       <!-- ros2 control instance -->
       <xacro:ur_ros2_control
         name="${name}"
