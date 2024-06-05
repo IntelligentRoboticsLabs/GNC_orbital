@@ -159,19 +159,19 @@
 
         <model name="table">
             <static>true</static>
-            <pose>-2.0 -1.2 0.35 0 0 1.56</pose>
+            <pose>{{x_table}} {{y_table}} {{z_table}} {{roll_table}} {{pitch_table}} {{yaw_table}}</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>1.2 0.6 0.1</size>
+                            <size>{{length_table}} {{width_table}} {{height_table}}</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>1.2 0.6 0.7</size>
+                            <size>{{length_table}} {{width_table}} {{height_table}}</size>
                         </box>
                     </geometry>
                     <material>

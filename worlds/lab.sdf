@@ -10,9 +10,9 @@
         </plugin>
 
         <light name="lab_light" type="point">
-            <pose frame="">0 0 2.0 0 0 0</pose>
-            <diffuse>1 0 0 1</diffuse>
-            <specular>0.2 0.2 0.2 1</specular>
+            <pose frame="">0.0 0.0 2.0 0.0 0.0 0.0</pose>
+            <diffuse>1.0 0.0 0.0 1.0</diffuse>
+            <specular>0.2 0.2 0.2 1.0</specular>
             <attenuation>
                 <range>80</range>
                 <constant>0.3</constant>
@@ -49,6 +49,7 @@
             </link>
         </model>
         
+        <!-- Wall 1 -->
         <model name="wall_1">
             <static>true</static>
             <pose>0 2.5 1 0 0 0</pose>
@@ -75,6 +76,7 @@
             </link>
         </model>
 
+        <!-- Wall 2 -->
         <model name="wall_2">
             <static>true</static>
             <pose>2.5 0 1 0 0 1.5708</pose>
@@ -101,6 +103,7 @@
             </link>
         </model>
 
+        <!-- Wall 3 -->
         <model name="wall_3">
             <static>true</static>
             <pose>0 -2.5 1 0 0 0</pose>
@@ -127,6 +130,7 @@
             </link>
         </model>
 
+        <!-- Wall 4 -->
         <model name="wall_4">
             <static>true</static>
             <pose>-2.5 0 1 0 0 1.5708</pose>
@@ -155,12 +159,12 @@
 
         <model name="table">
             <static>true</static>
-            <pose>-2.0 -1.2 0.35 0 0 1.56</pose>
+            <pose>-2.0 -1.2 0.35 0.0 0.0 1.56</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>1.2 0.6 0.1</size>
+                            <size>1.2 0.6 0.7</size>
                         </box>
                     </geometry>
                 </collision>

@@ -32,3 +32,18 @@ cast_shadows: 1
 direction_x: 0.1
 direction_y: 0.1
 direction_z: -1
+
+
+# UR 5 Table
+## Pose
+x_table: -2.0
+y_table: -1.2
+z_table: 0.35
+roll_table: 0.0
+pitch_table: 0.0
+yaw_table: 1.56
+
+## Size
+length_table: 1.2
+width_table: 0.6
+height_table: 0.7
