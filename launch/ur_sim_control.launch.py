@@ -41,7 +41,16 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from ament_index_python.packages import (
+    get_package_prefix,
+    get_package_share_directory
+)
+import os
+import yaml
 
+def load_yaml_file(file_path):
+    with open(file_path, 'r') as file:
+        return yaml.safe_load(file)
 
 def launch_setup(context, *args, **kwargs):
 
@@ -63,7 +72,23 @@ def launch_setup(context, *args, **kwargs):
             [FindPackageShare(runtime_config_package), 'config',  'ur_controllers.yaml']
         )
 
+    path_template = os.path.join(get_package_share_directory('gnc_orbital'), 'worlds', 'lab.sdf.template')
+    path_world = os.path.join(get_package_share_directory('gnc_orbital'), 'worlds', 'lab.sdf')
+
+    yaml_file_path = os.path.join(get_package_share_directory('gnc_orbital'), 'params', 'world_params.yaml')
+    config = load_yaml_file(yaml_file_path)
+
     nodes_to_start = []
+
+    with open(path_template, 'r') as file:
+        world_content = file.read()
+    
+    for key, value in config.items():
+        placeholder = f'{{{{{key}}}}}'
+        world_content = world_content.replace(placeholder, str(value))
+
+    with open(path_world, 'w') as file:
+        file.write(world_content)
 
     robot_description_content = Command(
         [
