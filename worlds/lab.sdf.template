@@ -9,18 +9,38 @@
             </ros>
         </plugin>
 
-        <light name="lab_light" type="point">
-            <pose frame="">{{x_light}} {{y_light}} {{z_light}} {{roll_light}} {{pitch_light}} {{yaw_light}}</pose>
-            <diffuse>{{R_light}} {{G_light}} {{B_light}} {{opacity_light}}</diffuse>
-            <specular>{{specular_R}} {{specular_G}} {{specular_B}} {{specular_opacity}}</specular>
+        <light name="spot1_light" type="spot">
+            <pose frame="">{{spot1_x_light}} {{spot1_y_light}} {{spot1_z_light}} {{spot1_roll_light}} {{spot1_pitch_light}} {{spot1_yaw_light}}</pose>
+            <diffuse>{{spot1_R_light}} {{spot1_G_light}} {{spot1_B_light}} {{spot1_opacity_light}}</diffuse>
+            <specular>{{spot1_specular_R}} {{spot1_specular_G}} {{spot1_specular_B}} {{spot1_specular_opacity}}</specular>
             <attenuation>
-                <range>{{attenuation_range}}</range>
-                <constant>{{attenuation_constant}}</constant>
-                <linear>{{attenuation_linear}}</linear>
-                <quadratic>{{attenuation_quadratic}}</quadratic>
+                <range>{{spot1_attenuation_range}}</range>
+                <linear>{{spot1_attenuation_linear}}</linear>
+                <quadratic>{{spot1_quadratic}}</quadratic>
             </attenuation>
-            <cast_shadows>{{cast_shadows}}</cast_shadows>
-            <direction>{{direction_x}} {{direction_y}} {{direction_z}}</direction>
+            <spot>
+                <inner_angle>{{spot1_inner_angle}}</inner_angle>
+                <outer_angle>{{spot1_outer_angle}}</outer_angle>
+                <falloff>{{spot1_fall_off}}</falloff>
+            </spot>
+            <direction>0 0 -1</direction>
+        </light>
+
+        <light name="spot2_light" type="spot">
+            <pose frame="">{{spot2_x_light}} {{spot2_y_light}} {{spot2_z_light}} {{spot2_roll_light}} {{spot2_pitch_light}} {{spot2_yaw_light}}</pose>
+            <diffuse>{{spot2_R_light}} {{spot2_G_light}} {{spot2_B_light}} {{spot2_opacity_light}}</diffuse>
+            <specular>{{spot2_specular_R}} {{spot2_specular_G}} {{spot2_specular_B}} {{spot2_specular_opacity}}</specular>
+            <attenuation>
+                <range>{{spot2_attenuation_range}}</range>
+                <linear>{{spot2_attenuation_linear}}</linear>
+                <quadratic>{{spot2_quadratic}}</quadratic>
+            </attenuation>
+            <spot>
+                <inner_angle>{{spot2_inner_angle}}</inner_angle>
+                <outer_angle>{{spot2_outer_angle}}</outer_angle>
+                <falloff>{{spot2_fall_off}}</falloff>
+            </spot>
+            <direction>0 0 -1</direction>
         </light>
 
         <model name="ground_plane">
@@ -41,117 +61,113 @@
                         </plane>
                     </geometry>
                     <material>
-                        <ambient>0.3 0.3 0.3 1</ambient>
-                        <diffuse>0.3 0.3 0.3 1</diffuse>
-                        <specular>0.3 0.3 0.3 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
                     </material>
                 </visual>
             </link>
         </model>
         
-        <!-- Wall 1 -->
         <model name="wall_1">
             <static>true</static>
-            <pose>0 2.5 1 0 0 0</pose>
+            <pose>0 3.0 2 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0.8 0.8 0.8 1</diffuse>
-                        <specular>0.8 0.8 0.8 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Wall 2 -->
         <model name="wall_2">
             <static>true</static>
-            <pose>2.5 0 1 0 0 1.5708</pose>
+            <pose>3.0 0 2 0 0 1.5708</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0.8 0.8 0.8 1</diffuse>
-                        <specular>0.8 0.8 0.8 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Wall 3 -->
         <model name="wall_3">
             <static>true</static>
-            <pose>0 -2.5 1 0 0 0</pose>
+            <pose>0 -3.0 2 0 0 0</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0.8 0.8 0.8 1</diffuse>
-                        <specular>0.8 0.8 0.8 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
                     </material>
                 </visual>
             </link>
         </model>
 
-        <!-- Wall 4 -->
         <model name="wall_4">
             <static>true</static>
-            <pose>-2.5 0 1 0 0 1.5708</pose>
+            <pose>-3.0 0 2 0 0 1.5708</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>5 0.1 2</size>
+                            <size>6 0.1 4</size>
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0.8 0.8 0.8 1</diffuse>
-                        <specular>0.8 0.8 0.8 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
                     </material>
                 </visual>
             </link>
@@ -175,9 +191,65 @@
                         </box>
                     </geometry>
                     <material>
-                        <ambient>0.8 0.8 0.8 1</ambient>
-                        <diffuse>0.8 0.8 0.8 1</diffuse>
-                        <specular>0.8 0.8 0.8 1</specular>
+                        <ambient>0.1 0.1 0.1 1</ambient>
+                        <diffuse>0.5 0.5 0.5 1</diffuse>
+                        <specular>1 1 1 1</specular>
+                    </material>
+                </visual>
+            </link>
+        </model>
+
+        <model name="spot_1">
+            <static>true</static>
+            <pose>{{spot1_x_light}} {{spot1_y_light}} {{spot1_cylinder_z}} 0 0 0</pose>
+            <link name="spot_1_link">
+                <collision name="spot_1_collision">
+                    <geometry>
+                        <cylinder>
+                            <radius>0.05</radius>
+                            <length>{{spot1_cylinder_length}}</length>
+                        </cylinder>
+                    </geometry>
+                </collision>
+                <visual name="foco_visual">
+                    <geometry>
+                        <cylinder>
+                            <radius>0.05</radius>
+                            <length>{{spot1_cylinder_length}}</length>
+                        </cylinder>
+                    </geometry>
+                    <material>
+                        <ambient>0 0 0 1</ambient>
+                        <diffuse>0.2 0.2 0.2 1</diffuse>
+                        <specular>0.5 0.5 0.5 1</specular>
+                    </material>
+                </visual>
+            </link>
+        </model>
+
+        <model name="spot_2">
+            <static>true</static>
+            <pose>{{spot2_x_light}} {{spot2_y_light}} {{spot2_cylinder_z}} 0 0 0</pose>
+            <link name="spot_2_link">
+                <collision name="spot_2_collision">
+                    <geometry>
+                        <cylinder>
+                            <radius>0.05</radius>
+                            <length>{{spot2_cylinder_length}}</length>
+                        </cylinder>
+                    </geometry>
+                </collision>
+                <visual name="foco_visual">
+                    <geometry>
+                        <cylinder>
+                            <radius>0.05</radius>
+                            <length>{{spot2_cylinder_length}}</length>
+                        </cylinder>
+                    </geometry>
+                    <material>
+                        <ambient>0 0 0 1</ambient>
+                        <diffuse>0.2 0.2 0.2 1</diffuse>
+                        <specular>0.5 0.5 0.5 1</specular>
                     </material>
                 </visual>
             </link>

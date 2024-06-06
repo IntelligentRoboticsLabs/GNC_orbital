@@ -1,0 +1,13 @@
+gnc_orbital:
+  arm1:
+    name: ur3
+    type: ur3
+    tf_prefix: ur3_
+    position: [-2.4, -1.6, 0.73]
+    orientation: [0, 0, 0]
+  arm2:
+    name: ur10
+    type: ur10
+    tf_prefix: ur10_
+    position: [0, -2.89, 1]
+    orientation: [-1.56, 0, 0]

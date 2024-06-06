@@ -42,7 +42,6 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import (
-    get_package_prefix,
     get_package_share_directory
 )
 import os
@@ -87,8 +86,23 @@ def launch_setup(context, *args, **kwargs):
         placeholder = f'{{{{{key}}}}}'
         world_content = world_content.replace(placeholder, str(value))
 
+        if (key == 'spot1_z_light'):
+            world_content = world_content.replace('{{spot1_cylinder_z}}', str((value-0.05)/2))
+            world_content = world_content.replace('{{spot1_cylinder_length}}', str(value-0.05))
+
+        if (key == 'spot2_z_light'):
+            world_content = world_content.replace('{{spot2_cylinder_z}}', str((value-0.05)/2))
+            world_content = world_content.replace('{{spot2_cylinder_length}}', str(value-0.05))
+
     with open(path_world, 'w') as file:
         file.write(world_content)
+
+    arms_params_file = os.path.join(get_package_share_directory('gnc_orbital'), 'params', 'arms_params.yaml')
+    with open(arms_params_file, "r") as stream:
+        arms_params = (yaml.safe_load(stream))
+
+    arm1 = arms_params['gnc_orbital']['arm1']
+    arm2 = arms_params['gnc_orbital']['arm2']
 
     robot_description_content = Command(
         [
@@ -108,12 +122,37 @@ def launch_setup(context, *args, **kwargs):
             safety_k_position,
             ' ',
             'name:=',
-            'ur',
+            'gnc_orbital',
+            ' ',
+            'name1:=',
+            arm1['name'],
+            ' ',
+            'name2:=',
+            arm2['name'],
+            ' ',
+            'ur_type1:=',
+            arm1['type'],
+            ' ',
+            'ur_type2:=',
+            arm2['type'],
+            ' ',
+            'tf_prefix1:=',
+            arm1['tf_prefix'],
+            ' ',
+            'tf_prefix2:=',
+            arm2['tf_prefix'],
+            ' ',
+            'arm1_pose:="', f"{arm1['position'][0]} {arm1['position'][1]} {arm1['position'][2]}", '"',
+            ' ',
+            'arm1_orientation:="', f"{arm1['orientation'][0]} {arm1['orientation'][1]} {arm1['orientation'][2]}", '"',
+            ' ',
+            'arm2_pose:="', f"{arm2['position'][0]} {arm2['position'][1]} {arm2['position'][2]}", '"',
+            ' ',
+            'arm2_orientation:="', f"{arm2['orientation'][0]} {arm2['orientation'][1]} {arm2['orientation'][2]}", '"',
             ' ',
             'sim_gazebo:=true',
             ' ',
-            'simulation_controllers:=',
-            initial_joint_controllers,
+            'simulation_controllers:=', initial_joint_controllers,
         ]
     )
     robot_description = {'robot_description': robot_description_content}
