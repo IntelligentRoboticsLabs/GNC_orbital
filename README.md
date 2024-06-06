@@ -11,6 +11,7 @@ Simulator for guidance, navigation and control of proximity orbital operations.
 - [Instalation](#instalation)
 - [Launch the simulation environment](#launch-the-simulation-environment)
 - [Interfaces](#interfaces)
+- [Configuration](#configuration)
 - [Usage](#usage)
 - [Demos](#demos)
 - [About](#about)
@@ -57,7 +58,7 @@ ros2 launch gnc_orbital ur_sim_control.launch.py
 
 Once launched, the rviz viewer with both arms, camera and rail, and the gazebo simulation environment should open.
 
-![Screenshot from 2024-05-27 11-48-34](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/83673c64-a232-448d-9c75-023ef940c916)
+![simulation](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/451b97c9-ce72-4c17-8f82-575c2d83de9f)
 
 If what you want is for the rviz or gazebo viewer not to open, use one of these two commands or a combination of both:
 
@@ -87,31 +88,30 @@ Once the simulation is launched, you can use the `ros2 topic list` command to ob
 /rosout
 /tf
 /tf_static
+/ur10_camera/camera_info
+/ur10_camera/depth/camera_info
+/ur10_camera/depth/image_raw
+/ur10_camera/depth/image_raw/compressed
+/ur10_camera/depth/image_raw/compressedDepth
+/ur10_camera/depth/image_raw/theora
+/ur10_camera/image_raw
+/ur10_camera/image_raw/compressed
+/ur10_camera/image_raw/compressedDepth
+/ur10_camera/image_raw/theora
+/ur10_camera/points
 /ur10_joint_state_broadcaster/transition_event
 /ur10_joint_trajectory_controller/controller_state
 /ur10_joint_trajectory_controller/joint_trajectory
 /ur10_joint_trajectory_controller/state
 /ur10_joint_trajectory_controller/transition_event
-/ur5_camera/camera_info
-/ur5_camera/depth/camera_info
-/ur5_camera/depth/image_raw
-/ur5_camera/depth/image_raw/compressed
-/ur5_camera/depth/image_raw/compressedDepth
-/ur5_camera/depth/image_raw/theora
-/ur5_camera/image_raw
-/ur5_camera/image_raw/compressed
-/ur5_camera/image_raw/compressedDepth
-/ur5_camera/image_raw/theora
-/ur5_camera/imu
-/ur5_camera/points
-/ur5_joint_state_broadcaster/transition_event
-/ur5_joint_trajectory_controller/controller_state
-/ur5_joint_trajectory_controller/joint_trajectory
-/ur5_joint_trajectory_controller/state
-/ur5_joint_trajectory_controller/transition_event
+/ur3_joint_state_broadcaster/transition_event
+/ur3_joint_trajectory_controller/controller_state
+/ur3_joint_trajectory_controller/joint_trajectory
+/ur3_joint_trajectory_controller/state
+/ur3_joint_trajectory_controller/transition_event
 ```
 
-You have the topics for each of the robots, where you can see the status of each of the joints of each arm, or the image from the camera that the ur5 has. Additionally, you will be able to see all the transforms in /tf or /tf_static
+You have the topics for each of the robots, where you can see the status of each of the joints of each arm, or the image from the camera that the ur10 has. Additionally, you will be able to see all the transforms in /tf or /tf_static
 
 </details>
 
@@ -122,23 +122,148 @@ Once the simulation is launched, you can use the `ros2 action list` command to o
 
 ```bash
 /ur10_joint_trajectory_controller/follow_joint_trajectory
-/ur5_joint_trajectory_controller/follow_joint_trajectory
+/ur3_joint_trajectory_controller/follow_joint_trajectory
 ```
 
 These are the actions that moveit2 will use to be able to move the arms
 
 </details>
 
+## Configuration
+### Spotlights
+In the file `params/world_params.yaml` you will find the world configurations, including the spotlights.
+
+<details>
+<summary>world_params.yaml</summary>
+  
+```yaml
+# Spotlight 1
+## Pose
+spot1_x_light: 0.0
+spot1_y_light: 0.0
+spot1_z_light: 1.2
+spot1_roll_light: 0.0
+spot1_pitch_light: 1.56
+spot1_yaw_light: 0.78
+
+## Diffuse
+spot1_R_light: 1
+spot1_G_light: 1
+spot1_B_light: 1
+spot1_opacity_light: 1.0
+
+## Specular
+spot1_specular_R: 1
+spot1_specular_G: 1
+spot1_specular_B: 1
+spot1_specular_opacity: 1.0
+
+## Attenuation
+spot1_attenuation_range: 30
+spot1_attenuation_linear: 1
+spot1_quadratic: 0.001
+
+## Spot
+spot1_inner_angle: 0.1
+spot1_outer_angle: 0.2
+spot1_fall_off: 0.5
+
+
+# Spotlight 2
+## Pose
+spot2_x_light: -2.0
+spot2_y_light: 0.0
+spot2_z_light: 1.2
+spot2_roll_light: 0.0
+spot2_pitch_light: 1.56
+spot2_yaw_light: 2.53
+
+## Diffuse
+spot2_R_light: 1
+spot2_G_light: 1
+spot2_B_light: 1
+spot2_opacity_light: 1.0
+
+## Specular
+spot2_specular_R: 1
+spot2_specular_G: 1
+spot2_specular_B: 1
+spot2_specular_opacity: 1.0
+
+## Attenuation
+spot2_attenuation_range: 30
+spot2_attenuation_linear: 1
+spot2_quadratic: 0.001
+
+## Spot
+spot2_inner_angle: 0.1
+spot2_outer_angle: 0.2
+spot2_fall_off: 0.5
+```
+</details>
+
+Parameters to take into account:
+- To change the color of the spotlights, you have to modify the diffuse and specular RGB values, which range from 0 to 1.
+- To modify the light range, you have to modify the spotlight's attenuation_range value.
+- To modify the angle by which the light extends, you must touch the outer_angle value. This value cannot be less than the inner, so if a smaller angle is necessary, both will have to be modified.
+- You can also modify the position of the spotlights and the angle at which the light goes, by touching the xyz rpy parameters.
+- The parameters attenuation_linear, quadratic and fall_of are used to configure how the light decreases linearly with distance.
+  
+### Arms
+The configuration of the arms is located in params/arms_params.yaml, and this allows you to modify its position and initial orientation, as well as the name given to it, type of arm and the prefix that will be given to the tf of the arm to differentiate them from another.
+
+<details>
+<summary>arms_params.yaml</summary>
+  
+```yaml
+gnc_orbital:
+  arm1:
+    name: ur3
+    type: ur3
+    tf_prefix: ur3_
+    position: [-2.4, -1.6, 0.73]
+    orientation: [0, 0, 0]
+  arm2:
+    name: ur10
+    type: ur10
+    tf_prefix: ur10_
+    position: [0, -2.89, 1]
+    orientation: [-1.56, 0, 0]
+```
+</details>
+
+It must be taken into account that if the table arm is going to be moved, the position of this table must also be modified. You can also do this from the params/world_params.yaml file
+
+<details>
+<summary>world_params.yaml</summary>
+  
+```yaml
+# UR 5 Table
+## Pose
+x_table: -2.6
+y_table: -1.1
+z_table: 0.35
+roll_table: 0.0
+pitch_table: 0.0
+yaw_table: 1.56
+
+## Size
+length_table: 1.2
+width_table: 0.6
+height_table: 0.73
+```
+</details>
+
 ## Usage
-In order to move the ur5 robot, you will have to use the following command from terminal:
+In order to move the ur3 robot, you will have to use the following command from terminal:
 
 ```bash
-ros2 topic pub /ur5_joint_trajectory_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "header: 
+ros2 topic pub /ur3_joint_trajectory_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "header: 
   stamp:
     sec: 0
     nanosec: 0
   frame_id: ''
-joint_names: ['ur5_shoulder_pan_joint', 'ur5_shoulder_lift_joint', 'ur5_elbow_joint', 'ur5_wrist_1_joint', 'ur5_wrist_2_joint', 'ur5_wrist_3_joint']
+joint_names: ['ur3_shoulder_pan_joint', 'ur3_shoulder_lift_joint', 'ur3_elbow_joint', 'ur3_wrist_1_joint', 'ur3_wrist_2_joint', 'ur3_wrist_3_joint']
 points: [{positions: [0.0, -1.57, 1.57, 0.0, 0.0, 0.0],
       time_from_start: {sec: 2, nanosec: 0}}]"
 ```
@@ -152,8 +277,8 @@ ros2 topic pub /ur10_joint_trajectory_controller/joint_trajectory trajectory_msg
     nanosec: 0
   frame_id: ''
 joint_names: ['ur10_shoulder_pan_joint', 'ur10_shoulder_lift_joint', 'ur10_elbow_joint', 'ur10_wrist_1_joint', 'ur10_wrist_2_joint', 'ur10_wrist_3_joint', 'ur10_rail_joint']
-points: [{positions: [0.0, -1.57, 1.57, 0.0, 0.0, 0.0, 0.6],
-      time_from_start: {sec: 2, nanosec: 0}}]" 
+points: [{positions: [0.0, -1.57, -1.57, 0.7, 1.5, -1.2, -1.1],
+      time_from_start: {sec: 2, nanosec: 0}}]"
 ```
 
 If what you want is to see the image or the pointcloud generated by the camera, or the transform system, you should go to Rviz and follow the following steps:
@@ -166,6 +291,9 @@ If what you want is to see the image or the pointcloud generated by the camera, 
 In this demo the commands given above are being executed, only modifying the positions of the joints:
 
 [Demo 01: ur5 arm movement with camera and ur10 arm publishing in topics](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/b95b3e50-8d5f-4296-9769-043cdaa1f76b)
+
+[Demo 02: ur3 and ur10 arm movement with camera. Totally dark world with spotlights](https://github.com/IntelligentRoboticsLabs/GNC_orbital/assets/44479765/e13574ec-540a-47cf-b334-20a12cc766e9)
+
 
 ## About
 This is a project made by the [Intelligent Robotics Lab], a research group from the [Universidad Rey Juan Carlos].
