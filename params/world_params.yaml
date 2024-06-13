@@ -1,0 +1,77 @@
+# Spotlight 1
+## Pose
+spot1_x_light: 0.0
+spot1_y_light: 0.0
+spot1_z_light: 1.2
+spot1_roll_light: 0.0
+spot1_pitch_light: 1.56
+spot1_yaw_light: 0.78
+
+## Diffuse
+spot1_R_light: 1
+spot1_G_light: 1
+spot1_B_light: 1
+spot1_opacity_light: 1.0
+
+## Specular
+spot1_specular_R: 1
+spot1_specular_G: 1
+spot1_specular_B: 1
+spot1_specular_opacity: 1.0
+
+## Attenuation
+spot1_attenuation_range: 30
+spot1_attenuation_linear: 1
+spot1_quadratic: 0.001
+
+## Spot
+spot1_inner_angle: 0.5
+spot1_outer_angle: 1.0
+spot1_fall_off: 0.5
+
+
+# Spotlight 2
+## Pose
+spot2_x_light: -2.0
+spot2_y_light: 0.0
+spot2_z_light: 1.2
+spot2_roll_light: 0.0
+spot2_pitch_light: 1.56
+spot2_yaw_light: 2.53
+
+## Diffuse
+spot2_R_light: 1
+spot2_G_light: 1
+spot2_B_light: 1
+spot2_opacity_light: 1.0
+
+## Specular
+spot2_specular_R: 1
+spot2_specular_G: 1
+spot2_specular_B: 1
+spot2_specular_opacity: 1.0
+
+## Attenuation
+spot2_attenuation_range: 30
+spot2_attenuation_linear: 1
+spot2_quadratic: 0.001
+
+## Spot
+spot2_inner_angle: 0.5
+spot2_outer_angle: 0.5
+spot2_fall_off: 0.5
+
+
+# UR 5 Table
+## Pose
+x_table: -2.6
+y_table: -1.1
+z_table: 0.35
+roll_table: 0.0
+pitch_table: 0.0
+yaw_table: 1.56
+
+## Size
+length_table: 1.2
+width_table: 0.6
+height_table: 0.73

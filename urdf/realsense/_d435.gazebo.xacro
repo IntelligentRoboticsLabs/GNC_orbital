@@ -24,7 +24,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
           </image>
           <clip>
             <near>0.05</near>
-            <far>3</far>
+            <far>10</far>
           </clip>
         </camera>
         <plugin name="${camera_name}_controller" filename="libgazebo_ros_camera.so">

@@ -10,35 +10,35 @@
         </plugin>
 
         <light name="spot1_light" type="spot">
-            <pose frame="">0.0 0.0 1.2 0.0 1.56 0.78</pose>
-            <diffuse>1 1 1 1.0</diffuse>
-            <specular>1 1 1 1.0</specular>
+            <pose frame="">{{spot1_x_light}} {{spot1_y_light}} {{spot1_z_light}} {{spot1_roll_light}} {{spot1_pitch_light}} {{spot1_yaw_light}}</pose>
+            <diffuse>{{spot1_R_light}} {{spot1_G_light}} {{spot1_B_light}} {{spot1_opacity_light}}</diffuse>
+            <specular>{{spot1_specular_R}} {{spot1_specular_G}} {{spot1_specular_B}} {{spot1_specular_opacity}}</specular>
             <attenuation>
-                <range>30</range>
-                <linear>1</linear>
-                <quadratic>0.001</quadratic>
+                <range>{{spot1_attenuation_range}}</range>
+                <linear>{{spot1_attenuation_linear}}</linear>
+                <quadratic>{{spot1_quadratic}}</quadratic>
             </attenuation>
             <spot>
-                <inner_angle>0.5</inner_angle>
-                <outer_angle>1.0</outer_angle>
-                <falloff>0.5</falloff>
+                <inner_angle>{{spot1_inner_angle}}</inner_angle>
+                <outer_angle>{{spot1_outer_angle}}</outer_angle>
+                <falloff>{{spot1_fall_off}}</falloff>
             </spot>
             <direction>0 0 -1</direction>
         </light>
 
         <light name="spot2_light" type="spot">
-            <pose frame="">-2.0 0.0 1.2 0.0 1.56 2.53</pose>
-            <diffuse>1 1 1 1.0</diffuse>
-            <specular>1 1 1 1.0</specular>
+            <pose frame="">{{spot2_x_light}} {{spot2_y_light}} {{spot2_z_light}} {{spot2_roll_light}} {{spot2_pitch_light}} {{spot2_yaw_light}}</pose>
+            <diffuse>{{spot2_R_light}} {{spot2_G_light}} {{spot2_B_light}} {{spot2_opacity_light}}</diffuse>
+            <specular>{{spot2_specular_R}} {{spot2_specular_G}} {{spot2_specular_B}} {{spot2_specular_opacity}}</specular>
             <attenuation>
-                <range>30</range>
-                <linear>1</linear>
-                <quadratic>0.001</quadratic>
+                <range>{{spot2_attenuation_range}}</range>
+                <linear>{{spot2_attenuation_linear}}</linear>
+                <quadratic>{{spot2_quadratic}}</quadratic>
             </attenuation>
             <spot>
-                <inner_angle>0.5</inner_angle>
-                <outer_angle>0.5</outer_angle>
-                <falloff>0.5</falloff>
+                <inner_angle>{{spot2_inner_angle}}</inner_angle>
+                <outer_angle>{{spot2_outer_angle}}</outer_angle>
+                <falloff>{{spot2_fall_off}}</falloff>
             </spot>
             <direction>0 0 -1</direction>
         </light>
@@ -69,7 +69,6 @@
             </link>
         </model>
         
-        <!-- Wall 1 -->
         <model name="wall_1">
             <static>true</static>
             <pose>0 3.0 2 0 0 0</pose>
@@ -96,7 +95,6 @@
             </link>
         </model>
 
-        <!-- Wall 2 -->
         <model name="wall_2">
             <static>true</static>
             <pose>3.0 0 2 0 0 1.5708</pose>
@@ -123,7 +121,6 @@
             </link>
         </model>
 
-        <!-- Wall 3 -->
         <model name="wall_3">
             <static>true</static>
             <pose>0 -3.0 2 0 0 0</pose>
@@ -178,19 +175,19 @@
 
         <model name="table">
             <static>true</static>
-            <pose>-2.6 -1.1 0.35 0.0 0.0 1.56</pose>
+            <pose>{{x_table}} {{y_table}} {{z_table}} {{roll_table}} {{pitch_table}} {{yaw_table}}</pose>
             <link name="link">
                 <collision name="collision">
                     <geometry>
                         <box>
-                            <size>1.2 0.6 0.73</size>
+                            <size>{{length_table}} {{width_table}} {{height_table}}</size>
                         </box>
                     </geometry>
                 </collision>
                 <visual name="visual">
                     <geometry>
                         <box>
-                            <size>1.2 0.6 0.73</size>
+                            <size>{{length_table}} {{width_table}} {{height_table}}</size>
                         </box>
                     </geometry>
                     <material>
@@ -204,13 +201,13 @@
 
         <model name="spot_1">
             <static>true</static>
-            <pose>0.0 0.0 0.575 0 0 0</pose>
+            <pose>{{spot1_x_light}} {{spot1_y_light}} {{spot1_cylinder_z}} 0 0 0</pose>
             <link name="spot_1_link">
                 <collision name="spot_1_collision">
                     <geometry>
                         <cylinder>
                             <radius>0.05</radius>
-                            <length>1.15</length>
+                            <length>{{spot1_cylinder_length}}</length>
                         </cylinder>
                     </geometry>
                 </collision>
@@ -218,7 +215,7 @@
                     <geometry>
                         <cylinder>
                             <radius>0.05</radius>
-                            <length>1.15</length>
+                            <length>{{spot1_cylinder_length}}</length>
                         </cylinder>
                     </geometry>
                     <material>
@@ -232,13 +229,13 @@
 
         <model name="spot_2">
             <static>true</static>
-            <pose>-2.0 0.0 0.575 0 0 0</pose>
+            <pose>{{spot2_x_light}} {{spot2_y_light}} {{spot2_cylinder_z}} 0 0 0</pose>
             <link name="spot_2_link">
                 <collision name="spot_2_collision">
                     <geometry>
                         <cylinder>
                             <radius>0.05</radius>
-                            <length>1.15</length>
+                            <length>{{spot2_cylinder_length}}</length>
                         </cylinder>
                     </geometry>
                 </collision>
@@ -246,7 +243,7 @@
                     <geometry>
                         <cylinder>
                             <radius>0.05</radius>
-                            <length>1.15</length>
+                            <length>{{spot2_cylinder_length}}</length>
                         </cylinder>
                     </geometry>
                     <material>

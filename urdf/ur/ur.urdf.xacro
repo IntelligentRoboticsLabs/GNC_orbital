@@ -1,32 +1,28 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
   <!-- robot name parameter -->
-  <xacro:arg name="name" default="ur" />
+  <xacro:arg name="name1" default="ur3" />
+  <xacro:arg name="name2" default="ur10" />
   <!-- import main macro -->
   <xacro:include filename="$(find gnc_orbital)/urdf/ur/ur_macro.xacro" />
   <xacro:include filename="$(find gnc_orbital)/urdf/realsense/_d435i.urdf.xacro" />
 
   <!-- possible 'ur_type' values: ur3, ur3e, ur5, ur5e, ur10, ur10e, ur16e, ur20, ur30 -->
   <!-- the default value should raise an error in case this was called without defining the type -->
-  <xacro:arg name="ur_type" default="ur5" />
+  <xacro:arg name="ur_type1" default="ur3" />
+  <xacro:arg name="ur_type2" default="ur10" />
 
   <!-- parameters -->
-  <xacro:arg name="tf_prefix" default="" />
-  <xacro:arg name="joint_limit_params"
-    default="$(find ur_description)/config/$(arg ur_type)/joint_limits.yaml" />
-  <xacro:arg name="kinematics_params"
-    default="$(find ur_description)/config/$(arg ur_type)/default_kinematics.yaml" />
-  <xacro:arg name="physical_params"
-    default="$(find ur_description)/config/$(arg ur_type)/physical_parameters.yaml" />
-  <xacro:arg name="visual_params"
-    default="$(find ur_description)/config/$(arg ur_type)/visual_parameters.yaml" />
+  <xacro:arg name="tf_prefix1" default="ur3_" />
+  <xacro:arg name="tf_prefix2" default="ur10_" />
   <xacro:arg name="transmission_hw_interface" default="" />
   <xacro:arg name="safety_limits" default="false" />
   <xacro:arg name="safety_pos_margin" default="0.15" />
   <xacro:arg name="safety_k_position" default="20" />
   <!-- ros2_control related parameters -->
   <xacro:arg name="headless_mode" default="false" />
-  <xacro:arg name="robot_ip" default="0.0.0.0" />
+  <xacro:arg name="robot_ip1" default="0.0.0.0" />
+  <xacro:arg name="robot_ip2" default="0.0.0.1" />
   <xacro:arg name="script_filename" default="" />
   <xacro:arg name="output_recipe_filename" default="" />
   <xacro:arg name="input_recipe_filename" default="" />
@@ -52,6 +48,10 @@
   <xacro:arg name="sim_gazebo" default="false" />
   <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="simulation_controllers" default="" />
+  <xacro:arg name="arm1_pose" default="-2.4 -1.6 0.73" />
+  <xacro:arg name="arm1_orientation" default="0 0 0" />
+  <xacro:arg name="arm2_pose" default="0 -2.9 1" />
+  <xacro:arg name="arm2_orientation" default="-1.56 0 0" />
 
   <!-- initial position for simulations (Fake Hardware, Gazebo, Ignition) -->
   <xacro:arg name="initial_positions_file"
@@ -65,13 +65,13 @@
 
   <!-- arm ur3-->
   <xacro:ur_robot
-    name="ur3"
-    tf_prefix="ur3_"
+    name="$(arg name1)"
+    tf_prefix="$(arg tf_prefix1)"
     parent="world"
-    joint_limits_parameters_file="$(find ur_description)/config/ur3/joint_limits.yaml"
-    kinematics_parameters_file="$(find ur_description)/config/ur3/default_kinematics.yaml"
-    physical_parameters_file="$(find ur_description)/config/ur3/physical_parameters.yaml"
-    visual_parameters_file="$(find ur_description)/config/ur3/visual_parameters.yaml"
+    joint_limits_parameters_file="$(find ur_description)/config/$(arg ur_type1)/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur_description)/config/$(arg ur_type1)/default_kinematics.yaml"
+    physical_parameters_file="$(find ur_description)/config/$(arg ur_type1)/physical_parameters.yaml"
+    visual_parameters_file="$(find ur_description)/config/$(arg ur_type1)/visual_parameters.yaml"
     transmission_hw_interface="$(arg transmission_hw_interface)"
     safety_limits="$(arg safety_limits)"
     safety_pos_margin="$(arg safety_pos_margin)"
@@ -91,7 +91,7 @@
     tool_tx_idle_chars="$(arg tool_tx_idle_chars)"
     tool_device_name="$(arg tool_device_name)"
     tool_tcp_port="$(arg tool_tcp_port)"
-    robot_ip="$(arg robot_ip)"
+    robot_ip="$(arg robot_ip1)"
     script_filename="$(arg script_filename)"
     output_recipe_filename="$(arg output_recipe_filename)"
     input_recipe_filename="$(arg input_recipe_filename)"
@@ -101,18 +101,18 @@
     script_sender_port="$(arg script_sender_port)"
     trajectory_port="$(arg trajectory_port)"
   >
-    <origin xyz="-1.8 -1.6 0.7" rpy="0 0 0" />          <!-- position robot in the world -->
+    <origin xyz="$(arg arm1_pose)" rpy="$(arg arm1_orientation)" />         
   </xacro:ur_robot>
 
   <!-- arm ur10-->
   <xacro:ur_robot
-    name="ur10"
-    tf_prefix="ur10_"
+    name="$(arg name2)"
+    tf_prefix="$(arg tf_prefix2)"
     parent="world"
-    joint_limits_parameters_file="$(find ur_description)/config/ur10/joint_limits.yaml"
-    kinematics_parameters_file="$(find ur_description)/config/ur10/default_kinematics.yaml"
-    physical_parameters_file="$(find ur_description)/config/ur10/physical_parameters.yaml"
-    visual_parameters_file="$(find ur_description)/config/ur10/visual_parameters.yaml"
+    joint_limits_parameters_file="$(find ur_description)/config/$(arg ur_type2)/joint_limits.yaml"
+    kinematics_parameters_file="$(find ur_description)/config/$(arg ur_type2)/default_kinematics.yaml"
+    physical_parameters_file="$(find ur_description)/config/$(arg ur_type2)/physical_parameters.yaml"
+    visual_parameters_file="$(find ur_description)/config/$(arg ur_type2)/visual_parameters.yaml"
     transmission_hw_interface="$(arg transmission_hw_interface)"
     safety_limits="$(arg safety_limits)"
     safety_pos_margin="$(arg safety_pos_margin)"
@@ -132,7 +132,7 @@
     tool_tx_idle_chars="$(arg tool_tx_idle_chars)"
     tool_device_name="$(arg tool_device_name)"
     tool_tcp_port="$(arg tool_tcp_port)"
-    robot_ip="$(arg robot_ip)"
+    robot_ip="$(arg robot_ip2)"
     script_filename="$(arg script_filename)"
     output_recipe_filename="$(arg output_recipe_filename)"
     input_recipe_filename="$(arg input_recipe_filename)"
@@ -143,7 +143,7 @@
     trajectory_port="$(arg trajectory_port)"
     generate_base="true"
   >
-    <origin xyz="0 -2.39 1" rpy="-1.56 0 0" />          <!-- position robot in the world -->
+  <origin xyz="$(arg arm2_pose)" rpy="$(arg arm2_orientation)" />      
   </xacro:ur_robot>
 
   <xacro:sensor_d435i name="ur10_camera" parent="ur10_wrist_3_link" use_nominal_extrinsics="true">
