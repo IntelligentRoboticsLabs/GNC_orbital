@@ -308,3 +308,11 @@ Maintainers:
 [Intelligent Robotics Lab]: https://intelligentroboticslab.gsyc.urjc.es/
 [Juan Carlos Manzanares Serrano]: https://github.com/Juancams
 [Juan S. Cely]: https://github.com/juanscelyg
+
+
+## Acknowledgment
+<img src="http://rosin-project.eu/wp-content/uploads/rosin_eu_flag.jpg"
+     alt="eu_flag" height="50" align="left" >  
+
+Grant TED2021-132099B-C32 funded by MCIN/AEI/10.13039/501100011033   
+and by "European Union NextGenerationEU/PRTR".
