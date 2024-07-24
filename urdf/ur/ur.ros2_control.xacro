@@ -163,14 +163,6 @@
         <state_interface name="effort"/>
       </joint>
       <xacro:if value="${generate_base}">
-        <joint name="${tf_prefix}base_joint">
-          <command_interface name="position"/>
-          <command_interface name="velocity"/>
-          <state_interface name="position"/>
-          <state_interface name="velocity"/>
-          <state_interface name="effort"/>
-        </joint>
-
         <joint name="${tf_prefix}rail_joint">
           <command_interface name="position"/>
           <command_interface name="velocity"/>

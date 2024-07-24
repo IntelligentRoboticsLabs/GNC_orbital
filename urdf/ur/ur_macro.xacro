@@ -297,22 +297,18 @@
 
     <!-- base_joint fixes base to the environment -->
     <xacro:unless value="${generate_base}">
-      <joint name="${tf_prefix}base_joint" type="prismatic">
+      <joint name="${tf_prefix}base_joint" type="fixed">
         <xacro:insert_block name="origin" />
         <parent link="${parent}" />
         <child link="${tf_prefix}base_link" />
-        <axis xyz="1 0 0"/>
-        <limit lower="0.0" upper="0.0" effort="10" velocity="0.0"/>
       </joint>
     </xacro:unless>
 
     <xacro:if value="${generate_base}">
-      <joint name="${tf_prefix}base_joint" type="prismatic">
+      <joint name="${tf_prefix}base_joint" type="fixed">
         <xacro:insert_block name="origin" />
         <parent link="${parent}" />
         <child link="${tf_prefix}rail_link" />
-        <axis xyz="1 0 0"/>
-        <limit lower="0.0" upper="0.0" effort="10" velocity="0.0"/>
       </joint>
     
       <joint name="${tf_prefix}rail_joint" type="prismatic">
