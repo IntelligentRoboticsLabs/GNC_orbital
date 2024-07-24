@@ -3,12 +3,6 @@
 
     <world name="lab">
 
-        <plugin name="set_light_properties_plugin" filename="libgazebo_ros_properties.so">
-            <ros>
-                <namespace>/small_warehouse</namespace>
-            </ros>
-        </plugin>
-
         <light name="spot1_light" type="spot">
             <pose frame="">{{spot1_x_light}} {{spot1_y_light}} {{spot1_z_light}} {{spot1_roll_light}} {{spot1_pitch_light}} {{spot1_yaw_light}}</pose>
             <diffuse>{{spot1_R_light}} {{spot1_G_light}} {{spot1_B_light}} {{spot1_opacity_light}}</diffuse>

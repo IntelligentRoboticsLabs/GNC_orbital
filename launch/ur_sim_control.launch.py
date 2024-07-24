@@ -43,7 +43,7 @@ from launch.actions import (
 )
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution, IfElseSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 import yaml
@@ -65,6 +65,7 @@ def launch_setup(context, *args, **kwargs):
     description_file = LaunchConfiguration('description_file')
     launch_rviz = LaunchConfiguration('launch_rviz')
     gazebo_gui = LaunchConfiguration('gazebo_gui')
+    world = LaunchConfiguration('world')
 
     rviz_config_file = PathJoinSubstitution(
         [FindPackageShare(runtime_config_package), 'rviz', 'view_arms.rviz']
@@ -208,18 +209,29 @@ def launch_setup(context, *args, **kwargs):
 
     # Spawn robot
     gazebo_spawn_robot = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        arguments=['-entity', 'ur', '-topic', '/robot_description'],
-        output='screen',
+        package="ros_gz_sim",
+        executable="create",
+        output="screen",
+        arguments=[
+            "-string",
+            robot_description_content,
+            "-name",
+            "ur",
+            "-allow_renaming",
+            "true",
+        ],
     )
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [FindPackageShare('gazebo_ros'), '/launch', '/gazebo.launch.py']
+            [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
         launch_arguments={
-            'gui': gazebo_gui
+            'gz_args': IfElseSubstitution(
+                gazebo_gui,
+                if_value=[" -r -v 4 ", world],
+                else_value=[" -s -r -v 4 ", world],
+            )
         }.items(),
     )
 

@@ -3,12 +3,6 @@
 
     <world name="lab">
 
-        <plugin name="set_light_properties_plugin" filename="libgazebo_ros_properties.so">
-            <ros>
-                <namespace>/small_warehouse</namespace>
-            </ros>
-        </plugin>
-
         <light name="spot1_light" type="spot">
             <pose frame="">0.0 0.0 1.2 0.0 1.56 0.78</pose>
             <diffuse>1 1 1 1.0</diffuse>
@@ -69,7 +63,6 @@
             </link>
         </model>
         
-        <!-- Wall 1 -->
         <model name="wall_1">
             <static>true</static>
             <pose>0 3.0 2 0 0 0</pose>
@@ -96,7 +89,6 @@
             </link>
         </model>
 
-        <!-- Wall 2 -->
         <model name="wall_2">
             <static>true</static>
             <pose>3.0 0 2 0 0 1.5708</pose>
@@ -123,7 +115,6 @@
             </link>
         </model>
 
-        <!-- Wall 3 -->
         <model name="wall_3">
             <static>true</static>
             <pose>0 -3.0 2 0 0 0</pose>
