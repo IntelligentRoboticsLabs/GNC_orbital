@@ -69,8 +69,8 @@
     safety_k_position:=20
     use_fake_hardware:=false
     fake_sensor_commands:=false
-    sim_gazebo:=false
-    sim_ignition:=true
+    sim_gazebo:=true
+    sim_ignition:=false
     headless_mode:=false
     initial_positions:=${dict(shoulder_pan_joint=0.0,shoulder_lift_joint=-1.57,elbow_joint=0.0,wrist_1_joint=-1.57,wrist_2_joint=0.0,wrist_3_joint=0.0)}
     use_tool_communication:=false
@@ -140,6 +140,7 @@
         trajectory_port="${trajectory_port}"
         non_blocking_read="${non_blocking_read}"
         keep_alive_count="${keep_alive_count}"
+        generate_base="${generate_base}"
         />
     </xacro:if>
 
@@ -296,18 +297,22 @@
 
     <!-- base_joint fixes base to the environment -->
     <xacro:unless value="${generate_base}">
-      <joint name="${tf_prefix}base_joint" type="fixed">
+      <joint name="${tf_prefix}base_joint" type="prismatic">
         <xacro:insert_block name="origin" />
         <parent link="${parent}" />
         <child link="${tf_prefix}base_link" />
+        <axis xyz="1 0 0"/>
+        <limit lower="0.0" upper="0.0" effort="10" velocity="0.0"/>
       </joint>
     </xacro:unless>
 
     <xacro:if value="${generate_base}">
-      <joint name="${tf_prefix}base_joint" type="fixed">
+      <joint name="${tf_prefix}base_joint" type="prismatic">
         <xacro:insert_block name="origin" />
         <parent link="${parent}" />
         <child link="${tf_prefix}rail_link" />
+        <axis xyz="1 0 0"/>
+        <limit lower="0.0" upper="0.0" effort="10" velocity="0.0"/>
       </joint>
     
       <joint name="${tf_prefix}rail_joint" type="prismatic">

@@ -155,9 +155,8 @@
     <gazebo reference="world">
     </gazebo>
     <gazebo>
-      <plugin name="gz_ros2_control::GazeboSimROS2ControlPluginl" filename="gz_ros2_control-system">
+      <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="gz_ros2_control-system">
         <parameters>$(arg simulation_controllers)</parameters>
-        <controller_manager_prefix_node_name>controller_manager</controller_manager_prefix_node_name>
       </plugin>
       <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
         <render_engine>ogre2</render_engine>
